@@ -240,10 +240,10 @@ $dataLakeAccountKey = List-StorageAccountKeys -SubscriptionId $subscriptionId -R
 $result = Create-DataLakeLinkedService -TemplatesPath $templatesPath -WorkspaceName $workspaceName -Name $dataLakeAccountName  -Key $dataLakeAccountKey
 Wait-ForOperation -WorkspaceName $workspaceName -OperationId $result.operationId
 
-Write-Information "Create linked service for SQL pool $($sqlPoolName) with user asaexp.sql.admin"
+Write-Information "Create linked service for SQL pool $($sqlPoolName) with user asa.sql.admin"
 
 $linkedServiceName = $sqlPoolName.ToLower()
-$result = Create-SQLPoolKeyVaultLinkedService -TemplatesPath $templatesPath -WorkspaceName $workspaceName -Name $linkedServiceName -DatabaseName $sqlPoolName -UserName "asaexp.sql.admin" -KeyVaultLinkedServiceName $keyVaultName -SecretName $keyVaultSQLUserSecretName
+$result = Create-SQLPoolKeyVaultLinkedService -TemplatesPath $templatesPath -WorkspaceName $workspaceName -Name $linkedServiceName -DatabaseName $sqlPoolName -UserName "asa.sql.admin" -KeyVaultLinkedServiceName $keyVaultName -SecretName $keyVaultSQLUserSecretName
 Wait-ForOperation -WorkspaceName $workspaceName -OperationId $result.operationId
 
 Write-Information "Create Blob Storage linked service $($blobStorageAccountName)"
@@ -279,4 +279,3 @@ $SetupStep2Variables = "
 ((Get-Content -path .\dp-203-setup-Part03.ps1 -Raw) -replace '# Add Values from the first setup script here',"$SetupStep2Variables") | Set-Content -Path .\dp-203-setup-Part03.ps1
 
 $SetupStep2Variables
-
